@@ -11,13 +11,21 @@ import (
 )
 
 func main() {
-	total := 0
+	var (
+		total = 0
+		done  bool
+	)
 
 	r := bufio.NewReader(os.Stdin)
-	for {
+	for !done {
 		l, err := r.ReadString('\n')
-		if err != nil && err != io.EOF {
-			log.Fatal(err)
+		if err != nil {
+			if err != io.EOF {
+				log.Fatal(err)
+			}
+			if err == io.EOF {
+				done = true
+			}
 		}
 		l = strings.TrimSpace(l)
 		if len(l) == 0 {
@@ -29,9 +37,6 @@ func main() {
 			continue
 		}
 		total += n
-		if err == io.EOF {
-			break
-		}
 	}
 	fmt.Println(total)
 }
