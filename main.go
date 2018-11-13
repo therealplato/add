@@ -33,7 +33,7 @@ func main() {
 		}
 		n, err2 := strconv.Atoi(l)
 		if err2 != nil {
-			fmt.Fprintf(os.Stdout, "%q was not an integer, skipping\n", l)
+			fmt.Fprintf(os.Stderr, "%q was not an integer, skipping\n", l)
 			continue
 		}
 		total += n
